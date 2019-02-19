@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+        <style>
+            /*the container must be positioned relative:*/
+            .custom-select {
+                position: relative;
+                font-family: Arial;
+            }
+
+        </style>
+
+    </head>
+    <body>
+        <div id="content">
+            <ul>
+                <li><a href="index.html">Pocetna</a></li>
+                <li><a href="opis.html">Opis</a></li>
+                <li><a href="registracija.html">Registruj se</a></li>
+                <li><a href="login.html">Uloguj se</a></li>
+                <li><a href="odjava.html">Odjava</a></li>
+                <li><a href="linkovi.html">Linkovi</a></li>
+            </ul>
+            <h1>Spisak igrica</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Naziv</th>
+                        <th>Datum</th>
+                        <th>Opis</th>
+                        <th>Zanr</th>
+                        <th>Izdavac</th>
+
+                    </tr>
+                </thead>
+                <tr 
+                    v-for="i in igre">
+                    <td>{{i.naziv}}</td>
+                    <td>{{i.datum}}</td>
+                    <td>{{i.opis}}</td>
+                    <td>{{i.zanr}}</td>
+                    <td>{{i.izdavac}}</td>
+                </tr>
+
+            </table>
+
+
+
+
+        </div>
+        <script>
+
+var app = new Vue({
+    el: "#content",
+    created: function () {
+        this.dodaj();
+        this.platforma();
+    },
+
+    data: {
+        igre: [],
+        platforme: []
+    },
+
+    methods: {
+        dodaj() {
+            axios.get("app/igre").then(function (result) {
+                app.igre = result.data;
+            });
+        }
+
+
+
+    }
+
+});
+
+
+
+
+        </script>  
+
+
+
+        <!--
+        var app = new Vue({
+    el: "#content",
+    data: {
+        igre: [],
+        platfome: []
+    },
+    created: function () {
+        axios.get("app/igre").then(function (result) {
+            app.igre = result.data;
+        });  
+        
+    }
+    
+        
+                platforma() {
+            axios.get("app/platforme").then(function (result) {
+                app.platforme = result.data;
+            });
+        },
+
+
+
+});
+                axios.get("app/platforme").then(function (result) {
+            app.platforme = result.data;
+        });
+        <div class="custom-select" style="width:200px;">
+             <select>
+                 <option value="0">Izaberite konzolu:</option>
+                 <option value="1">PS4</option>
+                 <option value="2">XboxOne</option>
+                 <option value="3">PC</option>
+                 <option value="4">Nintedo Switch</option>
+             </select></br>
+             <span>Unesite opis igre:</span>
+             <p style="white-space: pre-line;">{{ message }}</p>
+             <br>
+             <textarea v-model="message" placeholder="add multiple lines"></textarea> --> 
+
+
+    </body>
+</html>

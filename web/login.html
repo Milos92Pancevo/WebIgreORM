@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+        <link rel="stylesheet" href="style.css">
+
+        <style>
+            table, td {
+                border-width: 0px;
+            }
+
+            /* Full-width inputs */
+            input[type=text], input[type=password] {
+                width: 100%;
+                padding: 12px 20px;
+                margin: 8px 0;
+                display: inline-block;
+                border: 1px solid #ccc;
+                box-sizing: border-box;
+            }
+
+            /* Set a style for all buttons */
+            button {
+                background-color: #ff4000
+
+                    ;
+                color: white;
+                padding: 14px 20px;
+                margin: 8px 0;
+                border: none;
+                cursor: pointer;
+                width: 100%;
+
+            }
+
+            /* Add a hover effect for buttons */
+            button:hover {
+                opacity: 0.8;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="content">
+
+            <ul>
+                <li><a href="index.html">Pocetna</a></li>
+                <li><a href="opis.html">Opis</a></li>
+                <li><a href="registracija.html">Registruj se</a></li>
+                <li><a href="login.html">Uloguj se</a></li>
+                <li><a href="odjava.html">Odjava</a></li>
+                <li><a href="linkovi.html">Linkovi</a></li>
+            </ul>
+            <table>
+                <tr>
+                    <td>
+                        Email:
+                    </td>
+                    <td>
+                        <input type="text" v-model="user.email"/>
+                    </td>                        
+                </tr>
+                <tr>
+                    <td>
+                        Šifra:
+                    </td>
+                    <td>
+                        <input type="password" v-model="user.pass" />                        
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button v-on:click="logujse">loguj se</button><br>
+                    </td>
+                </tr>
+            </table>
+            <p style="color:red">{{message}}</p>
+
+
+        </div>
+
+        <script>
+var app = new Vue({
+    el: "#content",
+    data: {
+        user: {},
+        message: ""
+    },
+    methods: {
+        logujse() {
+            axios.post("app/login", app.user).then(function (response) {
+                if (response.data == "OK") {
+                    window.location = "home.html";
+                } else {
+                    app.user = {}
+                    app.message = "Email ili password nisu ispravni. Molimo vas pokušajte ponovo";
+                }
+            });
+        }
+    }
+});
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+        <style>
+            table, td {
+                border-width:0px;           
+            }
+
+            /* Full-width inputs */
+            input[type=text], input[type=password] {
+                width: 100%;
+                padding: 12px 20px;
+                margin: 8px 0;
+                display: inline-block;
+                border: 1px solid #ccc;
+                box-sizing: border-box;
+            }
+
+            /* Set a style for all buttons */
+            button {
+                background-color: #ff4000
+
+                    ;
+                color: white;
+                padding: 14px 20px;
+                margin: 8px 0;
+                border: none;
+                cursor: pointer;
+                width: 100%;
+
+            }
+
+
+
+            /* Add a hover effect for buttons */
+            button:hover {
+                opacity: 0.8;
+
+
+
+        </style>
+
+    </head>
+    <body>
+        <div id="content">
+            <ul>
+                <li><a href="index.html">Pocetna</a></li>
+                <li><a href="opis.html">Opis</a></li>
+                <li><a href="registracija.html">Registruj se</a></li>
+                <li><a href="login.html">Uloguj se</a></li>
+                <li><a href="odjava.html">Odjava</a></li>
+                <li><a href="linkovi.html">Linkovi</a></li>
+            </ul>
+
+
+
+            <table>
+                <h1>Registracija</h1>
+
+                <tr>
+                    <td>Ime:</td><td><input type="text" v-model="korisnik.ime" /></td>
+                </tr>
+                <tr>
+                    <td>Prezime:</td><td><input type="text" v-model="korisnik.prezime" /></td>
+                </tr>
+                <tr>
+                    <td v-bind:style="{color:email}" >Email:</td><td><input type="text" v-model="korisnik.email" @blur="proveri"/></td>
+                </tr>
+                <tr>
+                    <td>Sifra:</td><td><input type="password" v-model="korisnik.sifra" /></td>
+                </tr>
+
+
+                <tr>
+                    <td></td><td><button v-on:click="dodaj">Registuj se</button></td>
+                </tr>
+
+            </table>
+            <p style="color:red">{{message}}</p>
+
+            <img style="width:420px;opacity:0.9; margin-left: 500px" src="https://dvdbash.files.wordpress.com/2015/12/widescreen-gaming-gta-5-1645-wallpaper-trevor-yellow-jack-inn-grand-theft-auto-dvdbash.jpg    "/>
+
+
+        </div>
+
+
+
+
+
+        <script>
+
+
+
+
+var app = new Vue({
+    el: "#content",
+    data: {
+        korisnik: {
+
+        },
+        message: "",
+        email: "black"
+    },
+
+    methods: {
+        dodaj() {
+            axios.post("app/korisnik", app.korisnik).then(function (result) {
+                alert("Uspsesno ste se registvorali");
+                window.location = "login.html";
+            });
+        },
+        proveri() {
+            axios.post("app/korisnik/iskoriscen", app.korisnik).then(function (result) {
+                if (result.data.res == "ERR") {
+                    app.email = "red";
+                    alert("GRESKA");
+                } else {
+                    app.email = "black";
+                }
+            });
+        }
+    }
+
+
+});
+
+
+        </script>  
+    </body>
+</html>

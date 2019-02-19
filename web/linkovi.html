@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+        <style>
+            /*the container must be positioned relative:*/
+            .custom-select {
+                position: relative;
+                font-family: Arial;
+            }
+
+        </style>
+
+    </head>
+    <body>
+        <div id="content">
+            <ul>
+                <li><a href="index.html">Pocetna</a></li>
+                <li><a href="opis.html">Opis</a></li>
+                <li><a href="registracija.html">Registruj se</a></li>
+                <li><a href="login.html">Uloguj se</a></li>
+                <li><a href="odjava.html">Odjava</a></li>
+                <li><a href="linkovi.html">Linkovi</a></li>
+
+            </ul>
+            <h1>Spisak linkova</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Naziv igre</th>
+                        <th>Link od videa</th>
+                    </tr>
+                </thead>
+                <tr 
+                    v-for="e in link">
+                    <td>{{e.naziv}}</td>
+                    <td>{{e.link}}</td>
+                </tr>
+
+            </table>
+
+
+
+
+        </div>
+        <script>
+
+var app = new Vue({
+    el: "#content",
+    data: {
+        link: []
+    },
+    created: function () {
+        axios.get("app/link").then(function (result) {
+            if (result.data == "ERR")
+                window.location = "login.html";
+            else
+                app.link = result.data;
+        });
+    },
+    methods: {
+        dodaj() {
+            axios.get("app/link").then(function (result) {
+                app.link = result.data;
+            });
+        }
+    }
+
+
+});
+
+
+
+
+/**
+ *     var app = new Vue({
+ el: "#content",
+ created: function () {
+ this.dodaj();
+ },
+ 
+ data: {
+ link: []
+ },
+ 
+ methods: {
+ dodaj() {
+ axios.get("app/link").then(function (result) {
+ app.link = result.data;
+ });
+ }
+ 
+ 
+ 
+ }
+ 
+ });
+ 
+ 
+ 
+ */
+
+
+
+
+        </script>  
+
+

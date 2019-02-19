@@ -1,0 +1,64 @@
+/* 
+    Created on : Sep 22, 2018, 12:53:22 AM
+    Author     : Darth Revan
+*/
+
+body {
+    background-color: #D3D3D3;
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: 'Verdana', sans-serif;
+
+}
+
+#content {
+    width:1000px;
+    position:absolute;
+    left:50%;
+    transform: translateX(-50%);
+    height: 100vh;
+    background-color: white;
+    top:0;
+    box-shadow: 0px 0px 10px black;
+    padding: 50px;
+
+
+}
+
+td {
+    padding: 5px 15px;
+    border: 1px solid #ddd
+}
+
+th {
+    background-color: #ddd;
+}
+
+.error {
+    color:red;
+}
+
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #3f3c3c;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 30px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #ea2727;
+}
